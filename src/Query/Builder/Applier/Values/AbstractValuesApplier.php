@@ -15,8 +15,21 @@ abstract class AbstractValuesApplier implements Applier
     /**
      * @param array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null> $values
      */
-    public function __construct(protected array $values)
+    final public function __construct(protected array $values)
     {}
+
+    /**
+     * @param array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null> $values
+     */
+    public static function forValues(array $values): static
+    {
+        return new static($values);
+    }
+
+    public static function forValue(string $field, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value): static
+    {
+        return new static([$field => $value]);
+    }
 
     /**
      * @return iterable<string, string|int|bool|float|null>

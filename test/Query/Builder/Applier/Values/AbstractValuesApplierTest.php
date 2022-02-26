@@ -28,7 +28,7 @@ final class AbstractValuesApplierTest extends TestCase
             'bar' => $number,
         ];
 
-        $class = new class ($values) extends AbstractValuesApplier {
+        $mock = new class ($values) extends AbstractValuesApplier {
             public function apply(QueryBuilder $builder): QueryBuilder
             {
                 return $builder;
@@ -39,7 +39,7 @@ final class AbstractValuesApplierTest extends TestCase
                 yield from parent::getProccessableKeys($builder);
             }
         };
-
+        $applier = $mock::forValues($values);
 
         $builder = $this->createMock(QueryBuilder::class);
         $builder
@@ -50,7 +50,7 @@ final class AbstractValuesApplierTest extends TestCase
                 ['i_pos_3', 3],
             );
 
-        $processed = $class->getProccessableKeys($builder);
+        $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
             ? iterator_to_array($processed)
             : $processed;
@@ -60,6 +60,41 @@ final class AbstractValuesApplierTest extends TestCase
                 'foo' => 'sf_b45cffe084dd3d20d928bee85e7b0f21',
                 'bar' => 'i_pos_3',
             ],
+            $processed,
+        );
+    }
+
+    public function testForValue(): void
+    {
+        $string = $this->createMock(StringValueObject::class);
+        $string->method('__toString')->willReturn('string');
+
+        $mock = new class ([]) extends AbstractValuesApplier {
+            public function apply(QueryBuilder $builder): QueryBuilder
+            {
+                return $builder;
+            }
+
+            public function getProccessableKeys(QueryBuilder $builder): iterable
+            {
+                yield from parent::getProccessableKeys($builder);
+            }
+        };
+        $applier = $mock::forValue('foo', $string);
+
+        $builder = $this->createMock(QueryBuilder::class);
+        $builder
+            ->expects(self::once())
+            ->method('setParameter')
+            ->with('sf_b45cffe084dd3d20d928bee85e7b0f21', 'string');
+
+        $processed = $applier->getProccessableKeys($builder);
+        $processed = $processed instanceof Traversable
+            ? iterator_to_array($processed)
+            : $processed;
+
+        self::assertSame(
+            ['foo' => 'sf_b45cffe084dd3d20d928bee85e7b0f21'],
             $processed,
         );
     }
