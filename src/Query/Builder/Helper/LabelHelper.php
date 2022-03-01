@@ -8,9 +8,6 @@ use LessValueObject\Enum\EnumValueObject;
 use LessValueObject\Number\NumberValueObject;
 use LessValueObject\String\StringValueObject;
 
-/**
- * @internal
- */
 final class LabelHelper
 {
     private function __construct()
