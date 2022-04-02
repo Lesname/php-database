@@ -31,6 +31,25 @@ abstract class AbstractValuesApplier implements Applier
         return new static([$field => $value]);
     }
 
+    public function withValue(string $field, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value): self
+    {
+        $clone = clone $this;
+        $clone->values = [
+            ...$this->values,
+            $field => $value,
+        ];
+
+        return $clone;
+    }
+
+    /**
+     * @return array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null>
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
     /**
      * @return iterable<string, string|int|bool|float|null>
      */
