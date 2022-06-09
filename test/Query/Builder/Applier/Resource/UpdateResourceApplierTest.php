@@ -18,7 +18,7 @@ final class UpdateResourceApplierTest extends TestCase
 {
     public function testApply(): void
     {
-        $id = Identifier::generate();
+        $id = new Identifier('3d46827e-41f7-4ba4-bfa0-bf3380cdc797');
         $on = MilliTimestamp::now();
         $headers = new Headers();
 
