@@ -98,4 +98,25 @@ final class AbstractValuesApplierTest extends TestCase
             $processed,
         );
     }
+
+    public function testWithValue(): void
+    {
+        $mock = $this->getMockForAbstractClass(
+            AbstractValuesApplier::class,
+            [['foo' => 'bar']],
+        );
+
+        self::assertSame(['foo' => 'bar'], $mock->getValues());
+
+        $clone = $mock->withValue('bar', 'foo');
+
+        self::assertSame(['foo' => 'bar'], $mock->getValues());
+        self::assertSame(
+            [
+                'foo' => 'bar',
+                'bar' => 'foo',
+            ],
+            $clone->getValues(),
+        );
+    }
 }
