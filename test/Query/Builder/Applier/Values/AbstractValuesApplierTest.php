@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LessDatabaseTest\Query\Builder\Applier\Values;
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LessDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
 use LessValueObject\Number\Int\IntValueObject;
@@ -26,6 +27,7 @@ final class AbstractValuesApplierTest extends TestCase
         $values = [
             'foo' => $string,
             'bar' => $number,
+            'biz' => false,
         ];
 
         $mock = new class ($values) extends AbstractValuesApplier {
@@ -43,11 +45,12 @@ final class AbstractValuesApplierTest extends TestCase
 
         $builder = $this->createMock(QueryBuilder::class);
         $builder
-            ->expects(self::exactly(2))
+            ->expects(self::exactly(3))
             ->method('setParameter')
             ->withConsecutive(
-                ['sf_b45cffe084dd3d20d928bee85e7b0f21', 'string'],
-                ['i_pos_3', 3],
+                ['sf_b45cffe084dd3d20d928bee85e7b0f21', 'string', ParameterType::STRING],
+                ['i_pos_3', 3, ParameterType::INTEGER],
+                ['b_false', false, ParameterType::BOOLEAN],
             );
 
         $processed = $applier->getProccessableKeys($builder);
@@ -59,6 +62,7 @@ final class AbstractValuesApplierTest extends TestCase
             [
                 'foo' => 'sf_b45cffe084dd3d20d928bee85e7b0f21',
                 'bar' => 'i_pos_3',
+                'biz' => 'b_false',
             ],
             $processed,
         );

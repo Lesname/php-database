@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LessDatabase\Query\Builder\Applier\Values;
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LessDatabase\Query\Builder\Applier\Applier;
 use LessDatabase\Query\Builder\Helper\LabelHelper;
@@ -68,7 +69,15 @@ abstract class AbstractValuesApplier implements Applier
             }
 
             $key = LabelHelper::fromValue($value);
-            $builder->setParameter($key, $value);
+            $builder->setParameter(
+                $key,
+                $value,
+                match (true) {
+                    is_int($value) => ParameterType::INTEGER,
+                    is_bool($value) => ParameterType::BOOLEAN,
+                    default => ParameterType::STRING,
+                },
+            );
 
             yield $field => $key;
         }
