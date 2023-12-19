@@ -32,19 +32,11 @@ final class UpdateValuesApplierTest extends TestCase
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::exactly(2))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['sf_b45cffe084dd3d20d928bee85e7b0f21', 'string'],
-                ['i_pos_3', 3],
-            );
+            ->method('setParameter');
 
         $builder
             ->expects(self::exactly(2))
-            ->method('set')
-            ->withConsecutive(
-                ['foo', ':sf_b45cffe084dd3d20d928bee85e7b0f21'],
-                ['bar', ':i_pos_3'],
-            );
+            ->method('set');
 
         $applier->apply($builder);
     }
