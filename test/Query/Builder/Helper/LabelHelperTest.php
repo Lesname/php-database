@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LessDatabaseTest\Query\Builder\Helper;
 
+use RuntimeException;
 use LessDatabase\Query\Builder\Helper\LabelHelper;
 use LessValueObject\Enum\EnumValueObject;
 use LessValueObject\Number\NumberValueObject;
@@ -32,7 +33,7 @@ final class LabelHelperTest extends TestCase
         $enum = new class implements EnumValueObject {
             public static function cases(): array
             {
-
+                throw new RuntimeException();
             }
 
             public function getValue(): string
@@ -42,7 +43,7 @@ final class LabelHelperTest extends TestCase
 
             public function jsonSerialize(): mixed
             {
-
+                throw new RuntimeException();
             }
         };
 
