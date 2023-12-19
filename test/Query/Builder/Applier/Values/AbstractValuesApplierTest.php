@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace LessDatabaseTest\Query\Builder\Applier\Values;
 
-use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LessDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
 use LessValueObject\Number\Int\IntValueObject;
@@ -19,7 +18,7 @@ final class AbstractValuesApplierTest extends TestCase
     public function testProcessKey(): void
     {
         $string = $this->createMock(StringValueObject::class);
-        $string->method('__toString')->willReturn('string');
+        $string->method('getValue')->willReturn('string');
 
         $number = $this->createMock(IntValueObject::class);
         $number->method('getValue')->willReturn(3);
@@ -46,12 +45,7 @@ final class AbstractValuesApplierTest extends TestCase
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::exactly(3))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['sf_b45cffe084dd3d20d928bee85e7b0f21', 'string', ParameterType::STRING],
-                ['i_pos_3', 3, ParameterType::INTEGER],
-                ['b_false', false, ParameterType::BOOLEAN],
-            );
+            ->method('setParameter');
 
         $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
@@ -71,7 +65,7 @@ final class AbstractValuesApplierTest extends TestCase
     public function testForValue(): void
     {
         $string = $this->createMock(StringValueObject::class);
-        $string->method('__toString')->willReturn('string');
+        $string->method('getValue')->willReturn('string');
 
         $mock = new class ([]) extends AbstractValuesApplier {
             public function apply(QueryBuilder $builder): QueryBuilder

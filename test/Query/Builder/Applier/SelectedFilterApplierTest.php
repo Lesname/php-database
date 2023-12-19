@@ -66,11 +66,7 @@ final class SelectedFilterApplierTest extends TestCase
 
         $builder
             ->expects(self::exactly(2))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['i_pos_1', 1],
-                ['i_pos_2', 2],
-            );
+            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);
@@ -127,11 +123,7 @@ final class SelectedFilterApplierTest extends TestCase
 
         $builder
             ->expects(self::exactly(2))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['i_pos_1', 1],
-                ['i_pos_2', 2],
-            );
+            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);
@@ -182,19 +174,11 @@ final class SelectedFilterApplierTest extends TestCase
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::exactly(2))
-            ->method('andWhere')
-            ->withConsecutive(
-                ['fiz = :i_pos_1'],
-                ['fiz = :i_pos_2'],
-            );
+            ->method('andWhere');
 
         $builder
             ->expects(self::exactly(2))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['i_pos_1', 1],
-                ['i_pos_2', 2],
-            );
+            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);

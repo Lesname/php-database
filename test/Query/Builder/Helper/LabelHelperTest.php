@@ -5,10 +5,11 @@ namespace LessDatabaseTest\Query\Builder\Helper;
 
 use LessDatabase\Query\Builder\Helper\LabelHelper;
 use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Number\Int\IntValueObject;
 use LessValueObject\Number\NumberValueObject;
 use LessValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
+use LessValueObject\String\AbstractStringValueObject;
+use LessValueObject\Number\Int\AbstractIntValueObject;
 
 /**
  * @covers \LessDatabase\Query\Builder\Helper\LabelHelper
@@ -26,16 +27,50 @@ final class LabelHelperTest extends TestCase
     /**
      * @return array<array<mixed>>
      */
-    public function getFieldValueTests(): iterable
+    public static function getFieldValueTests(): iterable
     {
-        $enum = $this->createMock(EnumValueObject::class);
-        $enum->method('getValue')->willReturn('enum');
+        $enum = new class implements EnumValueObject {
+            public static function cases(): array
+            {
 
-        $number = $this->createMock(IntValueObject::class);
-        $number->method('getValue')->willReturn(3);
+            }
 
-        $string = $this->createMock(StringValueObject::class);
-        $string->method('__toString')->willReturn('string');
+            public function getValue(): string
+            {
+                return 'enum';
+            }
+
+            public function jsonSerialize(): mixed
+            {
+
+            }
+        };
+
+        $number = new class (3) extends AbstractIntValueObject
+        {
+            public static function getMinimumValue(): int
+            {
+                return 1;
+            }
+
+            public static function getMaximumValue(): int
+            {
+                return 5;
+            }
+        };
+
+        $string = new class ('string') extends AbstractStringValueObject
+        {
+            public static function getMinimumLength(): int
+            {
+                return 1;
+            }
+
+            public static function getMaximumLength(): int
+            {
+                return 7;
+            }
+        };
 
         return [
             [true, 'b_true'],

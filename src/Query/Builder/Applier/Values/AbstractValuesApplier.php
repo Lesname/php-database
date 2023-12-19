@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace LessDatabase\Query\Builder\Applier\Values;
 
+use RuntimeException;
 use Doctrine\DBAL\ParameterType;
+use LessValueObject\ValueObject;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LessDatabase\Query\Builder\Applier\Applier;
 use LessDatabase\Query\Builder\Helper\LabelHelper;
@@ -62,11 +64,9 @@ abstract class AbstractValuesApplier implements Applier
     protected function getProccessableKeys(QueryBuilder $builder): iterable
     {
         foreach ($this->values as $field => $value) {
-            if ($value instanceof NumberValueObject || $value instanceof EnumValueObject) {
-                $value = $value->getValue();
-            } elseif ($value instanceof StringValueObject) {
-                $value = (string)$value;
-            }
+            $value = $value instanceof ValueObject
+                ? $this->toNativeValue($value)
+                : $value;
 
             $key = LabelHelper::fromValue($value);
             $builder->setParameter(
@@ -81,5 +81,24 @@ abstract class AbstractValuesApplier implements Applier
 
             yield $field => $key;
         }
+    }
+
+    private function toNativeValue(ValueObject $value): string|int|float
+    {
+        if ($value instanceof EnumValueObject) {
+            return $value->getValue();
+        }
+
+        if ($value instanceof NumberValueObject) {
+            return $value->getValue();
+        }
+
+        if ($value instanceof StringValueObject) {
+            return $value->getValue();
+        }
+
+        $type = get_debug_type($value);
+
+        throw new RuntimeException("No support for '{$type}'");
     }
 }
