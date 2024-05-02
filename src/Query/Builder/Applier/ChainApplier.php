@@ -13,7 +13,7 @@ final class ChainApplier implements Applier
     public function __construct(private readonly array $appliers)
     {}
 
-    public static function chain(Applier... $appliers)
+    public static function chain(Applier ...$appliers): self
     {
         return new self($appliers);
     }
