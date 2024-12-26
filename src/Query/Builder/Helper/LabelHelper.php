@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace LessDatabase\Query\Builder\Helper;
 
-use BackedEnum;
 use RuntimeException;
 use LessValueObject\ValueObject;
 use LessValueObject\Enum\EnumValueObject;
@@ -38,7 +37,11 @@ final class LabelHelper
             return 'null';
         }
 
-        return 'sf_' . md5((string)$value);
+        $string = (string)$value;
+        $length = strlen($string);
+        $hash = md5($string);
+
+        return "sf_{$length}_{$hash}";
     }
 
     /**
@@ -47,15 +50,15 @@ final class LabelHelper
     private static function toNativeValue(ValueObject $value): string|int|float
     {
         if ($value instanceof EnumValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         if ($value instanceof NumberValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         if ($value instanceof StringValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         $type = get_debug_type($value);
