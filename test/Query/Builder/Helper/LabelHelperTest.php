@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace LessDatabaseTest\Query\Builder\Helper;
 
+use RuntimeException;
 use LessDatabase\Query\Builder\Helper\LabelHelper;
 use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Number\Int\IntValueObject;
 use LessValueObject\Number\NumberValueObject;
 use LessValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
+use LessValueObject\String\AbstractStringValueObject;
+use LessValueObject\Number\Int\AbstractIntValueObject;
 
 /**
  * @covers \LessDatabase\Query\Builder\Helper\LabelHelper
@@ -26,16 +28,57 @@ final class LabelHelperTest extends TestCase
     /**
      * @return array<array<mixed>>
      */
-    public function getFieldValueTests(): iterable
+    public static function getFieldValueTests(): iterable
     {
-        $enum = $this->createMock(EnumValueObject::class);
-        $enum->method('getValue')->willReturn('enum');
+        $enum = new class implements EnumValueObject {
+            public string $value = 'enum';
 
-        $number = $this->createMock(IntValueObject::class);
-        $number->method('getValue')->willReturn(3);
+            public static function cases(): array
+            {
+                throw new RuntimeException();
+            }
 
-        $string = $this->createMock(StringValueObject::class);
-        $string->method('__toString')->willReturn('string');
+            public static function from(string $value): static
+            {
+                throw new RuntimeException();
+            }
+
+            public function getValue(): string
+            {
+                return 'enum';
+            }
+
+            public function jsonSerialize(): mixed
+            {
+                throw new RuntimeException();
+            }
+        };
+
+        $number = new class (3) extends AbstractIntValueObject
+        {
+            public static function getMinimumValue(): int
+            {
+                return 1;
+            }
+
+            public static function getMaximumValue(): int
+            {
+                return 5;
+            }
+        };
+
+        $string = new class ('string') extends AbstractStringValueObject
+        {
+            public static function getMinimumLength(): int
+            {
+                return 1;
+            }
+
+            public static function getMaximumLength(): int
+            {
+                return 7;
+            }
+        };
 
         return [
             [true, 'b_true'],
@@ -43,11 +86,11 @@ final class LabelHelperTest extends TestCase
             [null, 'null'],
             [1, 'i_pos_1'],
             [-1, 'i_neg_1'],
-            [1.1, 'sf_777d45bbbcdf50d49c42c70ad7acf5fe'],
-            ['foobar', 'sf_3858f62230ac3c915f300c664312c63f'],
-            [$enum, 'sf_da45ec4be6574774008df9be683a4778'],
+            [1.1, 'sf_3_777d45bbbcdf50d49c42c70ad7acf5fe'],
+            ['foobar', 'sf_6_3858f62230ac3c915f300c664312c63f'],
+            [$enum, 'sf_4_da45ec4be6574774008df9be683a4778'],
             [$number, 'i_pos_3'],
-            [$string, 'sf_b45cffe084dd3d20d928bee85e7b0f21'],
+            [$string, 'sf_6_b45cffe084dd3d20d928bee85e7b0f21'],
         ];
     }
 }

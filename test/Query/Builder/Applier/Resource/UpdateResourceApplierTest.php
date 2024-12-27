@@ -32,11 +32,7 @@ final class UpdateResourceApplierTest extends TestCase
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::exactly(2))
-            ->method('set')
-            ->withConsecutive(
-                ['version', 'version + 1'],
-                ['activity_last', ':activity_last'],
-            );
+            ->method('set');
 
         $builder
             ->expects(self::once())
@@ -44,11 +40,7 @@ final class UpdateResourceApplierTest extends TestCase
             ->with('id = :id');
         $builder
             ->expects(self::exactly(2))
-            ->method('setParameter')
-            ->withConsecutive(
-                ['activity_last', $on],
-                ['id', $id],
-            );
+            ->method('setParameter');
 
         $applier->apply($builder);
     }

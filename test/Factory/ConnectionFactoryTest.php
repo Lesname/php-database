@@ -18,7 +18,12 @@ final class ConnectionFactoryTest extends TestCase
         $config = [
             'databases' => [
                 Connection::class => [
-                    'url' => 'mysql://user:password@localhost/db_name?charset=UTF8',
+                    'driver' => 'pdo_mysql',
+                    'host' => 'localhost',
+                    'user' => 'user',
+                    'password' => 'password',
+                    'dbname' => 'db_name',
+                    'charset' => 'UTF8MB4',
                 ],
             ],
         ];
@@ -31,7 +36,7 @@ final class ConnectionFactoryTest extends TestCase
             ->willReturn($config);
 
         $factory = new ConnectionFactory();
-        $connection = $factory($container);
+        $connection = $factory($container, Connection::class);
 
         self::assertInstanceOf(Connection::class, $connection);
     }
