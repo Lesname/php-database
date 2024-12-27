@@ -23,17 +23,12 @@ abstract class AbstractValuesApplier implements Applier
 
     /**
      * @param array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null> $values
-     *
-     * @return static
      */
     public static function forValues(array $values): static
     {
         return new static($values);
     }
 
-    /**
-     * @return static
-     */
     public static function forValue(string $field, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value): static
     {
         return new static([$field => $value]);
