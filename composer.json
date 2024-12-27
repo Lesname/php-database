@@ -24,10 +24,5 @@
     "psr-4": {
       "LessDatabaseTest\\": "test/"
     }
-  },
-  "config": {
-    "allow-plugins": {
-      "composer/package-versions-deprecated": true
-    }
   }
 }
