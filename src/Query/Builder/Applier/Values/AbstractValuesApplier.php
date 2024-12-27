@@ -86,15 +86,15 @@ abstract class AbstractValuesApplier implements Applier
     private function toNativeValue(ValueObject $value): string|int|float
     {
         if ($value instanceof EnumValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         if ($value instanceof NumberValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         if ($value instanceof StringValueObject) {
-            return $value->getValue();
+            return $value->value;
         }
 
         $type = get_debug_type($value);

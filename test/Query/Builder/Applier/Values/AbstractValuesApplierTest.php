@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace LessDatabaseTest\Query\Builder\Applier\Values;
 
+use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
+use LessValueObject\Number\NumberValueObject;
 use LessDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
 use LessValueObject\Number\Int\IntValueObject;
 use LessValueObject\String\StringValueObject;
@@ -17,11 +19,98 @@ final class AbstractValuesApplierTest extends TestCase
 {
     public function testProcessKey(): void
     {
-        $string = $this->createMock(StringValueObject::class);
-        $string->method('getValue')->willReturn('string');
+        $string = new class implements StringValueObject {
+            public string $value = 'string';
 
-        $number = $this->createMock(IntValueObject::class);
-        $number->method('getValue')->willReturn(3);
+            public static function getMinimumLength(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public static function getMaximumLength(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public function getValue(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function __toString(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function jsonSerialize(): mixed
+            {
+                throw new RuntimeException();
+            }
+        };
+
+        $number = new class implements IntValueObject {
+            public int $value = 3;
+
+            public static function getMinimumValue(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public static function getMaximumValue(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public function getValue(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public static function getMultipleOf(): int|float
+            {
+                throw new RuntimeException();
+            }
+
+            public function isGreaterThan(NumberValueObject|float|int $value): bool
+            {
+                throw new RuntimeException();
+            }
+
+            public function isLowerThan(NumberValueObject|float|int $value): bool
+            {
+                throw new RuntimeException();
+            }
+
+            public function isSame(NumberValueObject|float|int $value): bool
+            {
+                throw new RuntimeException();
+            }
+
+            public function diff(NumberValueObject|float|int $with): float|int
+            {
+                throw new RuntimeException();
+            }
+
+            public function subtract(NumberValueObject|float|int $value): static
+            {
+                throw new RuntimeException();
+            }
+
+            public function append(NumberValueObject|float|int $value): static
+            {
+                throw new RuntimeException();
+            }
+
+            public function __toString(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function jsonSerialize(): mixed
+            {
+                throw new RuntimeException();
+            }
+        };
 
         $values = [
             'foo' => $string,
@@ -54,7 +143,7 @@ final class AbstractValuesApplierTest extends TestCase
 
         self::assertSame(
             [
-                'foo' => 'sf_b45cffe084dd3d20d928bee85e7b0f21',
+                'foo' => 'sf_6_b45cffe084dd3d20d928bee85e7b0f21',
                 'bar' => 'i_pos_3',
                 'biz' => 'b_false',
             ],
@@ -64,8 +153,34 @@ final class AbstractValuesApplierTest extends TestCase
 
     public function testForValue(): void
     {
-        $string = $this->createMock(StringValueObject::class);
-        $string->method('getValue')->willReturn('string');
+        $string = new class implements StringValueObject {
+            public string $value = 'string';
+
+            public static function getMinimumLength(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public static function getMaximumLength(): int
+            {
+                throw new RuntimeException();
+            }
+
+            public function getValue(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function __toString(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function jsonSerialize(): mixed
+            {
+                throw new RuntimeException();
+            }
+        };
 
         $mock = new class ([]) extends AbstractValuesApplier {
             public function apply(QueryBuilder $builder): QueryBuilder
@@ -84,7 +199,7 @@ final class AbstractValuesApplierTest extends TestCase
         $builder
             ->expects(self::once())
             ->method('setParameter')
-            ->with('sf_b45cffe084dd3d20d928bee85e7b0f21', 'string');
+            ->with('sf_6_b45cffe084dd3d20d928bee85e7b0f21', 'string');
 
         $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
@@ -92,7 +207,7 @@ final class AbstractValuesApplierTest extends TestCase
             : $processed;
 
         self::assertSame(
-            ['foo' => 'sf_b45cffe084dd3d20d928bee85e7b0f21'],
+            ['foo' => 'sf_6_b45cffe084dd3d20d928bee85e7b0f21'],
             $processed,
         );
     }
