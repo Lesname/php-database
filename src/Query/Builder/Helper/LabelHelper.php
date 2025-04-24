@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Helper;
+namespace LesDatabase\Query\Builder\Helper;
 
 use RuntimeException;
-use LessValueObject\ValueObject;
-use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Number\NumberValueObject;
-use LessValueObject\String\StringValueObject;
+use LesValueObject\ValueObject;
+use LesValueObject\Enum\EnumValueObject;
+use LesValueObject\Number\NumberValueObject;
+use LesValueObject\String\StringValueObject;
 
 final class LabelHelper
 {

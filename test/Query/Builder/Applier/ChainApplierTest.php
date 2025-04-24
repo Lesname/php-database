@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier;
+namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\Applier;
-use LessDatabase\Query\Builder\Applier\ChainApplier;
+use LesDatabase\Query\Builder\Applier\Applier;
+use LesDatabase\Query\Builder\Applier\ChainApplier;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\ChainApplier
+ * @covers \LesDatabase\Query\Builder\Applier\ChainApplier
  */
 class ChainApplierTest extends TestCase
 {

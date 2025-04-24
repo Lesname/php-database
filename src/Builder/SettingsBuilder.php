@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Builder;
+namespace LesDatabase\Builder;
 
 use SensitiveParameter;
 

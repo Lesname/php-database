@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier;
+namespace LesDatabase\Query\Builder\Applier;
 
+use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessValueObject\String\Format\SearchTerm;
+use LesValueObject\String\Format\SearchTerm;
 
 final class SearchLikeApplier implements Applier
 {
@@ -35,6 +36,7 @@ final class SearchLikeApplier implements Applier
     public function __construct(private SearchTerm $term, private array $fields, private bool $order = true)
     {}
 
+    #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         $term = preg_replace('/[^[:alnum:][:space:]]/u', ' ', (string)$this->term);

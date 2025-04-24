@@ -1,18 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier\Resource;
+namespace LesDatabaseTest\Query\Builder\Applier\Resource;
 
+use Override;
+use LesDomain\Event\Property\Action;
+use LesDomain\Event\Property\Target;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier;
-use LessDomain\Event\AbstractAggregateEvent;
-use LessDomain\Event\Property\Headers;
-use LessValueObject\Number\Int\Date\MilliTimestamp;
-use LessValueObject\String\Format\Resource\Identifier;
+use LesDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier;
+use LesDomain\Event\AbstractAggregateEvent;
+use LesDomain\Event\Property\Headers;
+use LesValueObject\Number\Int\Date\MilliTimestamp;
+use LesValueObject\String\Format\Resource\Identifier;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier
+ * @covers \LesDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier
  */
 final class UpdateResourceApplierTest extends TestCase
 {
@@ -22,10 +25,34 @@ final class UpdateResourceApplierTest extends TestCase
         $on = MilliTimestamp::now();
         $headers = new Headers();
 
-        $event = $this->getMockForAbstractClass(
-            AbstractAggregateEvent::class,
-            [$id, $on, $headers],
-        );
+        $event = new class ($id, $on, $headers) extends AbstractAggregateEvent {
+            // phpcs:ignore
+            public Target $target {
+                get {
+                    // phpcs:ignore
+                    return $this->target;
+                }
+            }
+            // phpcs:ignore
+            public Action $action {
+                get {
+                    // phpcs:ignore
+                    return $this->action;
+                }
+            }
+
+            #[Override]
+            public function getTarget(): Target
+            {
+                return new Action('foo');
+            }
+
+            #[Override]
+            public function getAction(): Action
+            {
+                return new Action('bar');
+            }
+        };
 
         $applier = UpdateResourceApplier::fromEvent($event);
 

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Builder;
+namespace LesDatabaseTest\Builder;
 
-use LessDatabase\Builder\SettingsBuilder;
+use LesDatabase\Builder\SettingsBuilder;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Builder\SettingsBuilder
+ * @covers \LesDatabase\Builder\SettingsBuilder
  */
 class SettingsBuilderTest extends TestCase
 {

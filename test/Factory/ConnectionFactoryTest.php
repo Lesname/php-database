@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Factory;
+namespace LesDatabaseTest\Factory;
 
 use Doctrine\DBAL\Connection;
-use LessDatabase\Factory\ConnectionFactory;
+use LesDatabase\Factory\ConnectionFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 /**
- * @covers \LessDatabase\Factory\ConnectionFactory
+ * @covers \LesDatabase\Factory\ConnectionFactory
  */
 final class ConnectionFactoryTest extends TestCase
 {

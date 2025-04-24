@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier\Values;
+namespace LesDatabaseTest\Query\Builder\Applier\Values;
 
 use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessValueObject\Number\NumberValueObject;
-use LessDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
-use LessValueObject\Number\Int\IntValueObject;
-use LessValueObject\String\StringValueObject;
+use LesValueObject\Number\NumberValueObject;
+use LesDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
+use LesValueObject\Number\Int\IntValueObject;
+use LesValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
 use Traversable;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\Values\AbstractValuesApplier
+ * @covers \LesDatabase\Query\Builder\Applier\Values\AbstractValuesApplier
  */
 final class AbstractValuesApplierTest extends TestCase
 {

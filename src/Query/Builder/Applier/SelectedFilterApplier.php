@@ -1,21 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier;
+namespace LesDatabase\Query\Builder\Applier;
 
+use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Helper\LabelHelper;
-use LessValueObject\Composite\AbstractSelectedFilter;
-use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Enum\FilterMode;
-use LessValueObject\Number\NumberValueObject;
-use LessValueObject\String\StringValueObject;
+use LesDatabase\Query\Builder\Helper\LabelHelper;
+use LesValueObject\Composite\AbstractSelectedFilter;
+use LesValueObject\Enum\EnumValueObject;
+use LesValueObject\Enum\FilterMode;
+use LesValueObject\Number\NumberValueObject;
+use LesValueObject\String\StringValueObject;
 
 final class SelectedFilterApplier implements Applier
 {
     public function __construct(private string $field, private ?AbstractSelectedFilter $filter)
     {}
 
+    #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         if ($this->filter) {

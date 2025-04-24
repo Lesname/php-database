@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier\Values;
+namespace LesDatabase\Query\Builder\Applier\Values;
 
 use RuntimeException;
 use Doctrine\DBAL\ParameterType;
-use LessValueObject\ValueObject;
+use LesValueObject\ValueObject;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\Applier;
-use LessDatabase\Query\Builder\Helper\LabelHelper;
-use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Number\NumberValueObject;
-use LessValueObject\String\StringValueObject;
+use LesDatabase\Query\Builder\Applier\Applier;
+use LesDatabase\Query\Builder\Helper\LabelHelper;
+use LesValueObject\Enum\EnumValueObject;
+use LesValueObject\Number\NumberValueObject;
+use LesValueObject\String\StringValueObject;
 
 abstract class AbstractValuesApplier implements Applier
 {

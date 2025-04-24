@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Helper;
+namespace LesDatabaseTest\Query\Builder\Helper;
 
 use RuntimeException;
-use LessDatabase\Query\Builder\Helper\LabelHelper;
-use LessValueObject\Enum\EnumValueObject;
-use LessValueObject\Number\NumberValueObject;
-use LessValueObject\String\StringValueObject;
+use LesDatabase\Query\Builder\Helper\LabelHelper;
+use LesValueObject\Enum\EnumValueObject;
+use LesValueObject\Number\NumberValueObject;
+use LesValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
-use LessValueObject\String\AbstractStringValueObject;
-use LessValueObject\Number\Int\AbstractIntValueObject;
+use LesValueObject\String\AbstractStringValueObject;
+use LesValueObject\Number\Int\AbstractIntValueObject;
 
 /**
- * @covers \LessDatabase\Query\Builder\Helper\LabelHelper
+ * @covers \LesDatabase\Query\Builder\Helper\LabelHelper
  */
 final class LabelHelperTest extends TestCase
 {

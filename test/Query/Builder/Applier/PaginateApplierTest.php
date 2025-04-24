@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier;
+namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\PaginateApplier;
-use LessValueObject\Composite\Paginate;
-use LessValueObject\Number\Int\Paginate\Page;
-use LessValueObject\Number\Int\Paginate\PerPage;
+use LesDatabase\Query\Builder\Applier\PaginateApplier;
+use LesValueObject\Composite\Paginate;
+use LesValueObject\Number\Int\Paginate\Page;
+use LesValueObject\Number\Int\Paginate\PerPage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\PaginateApplier
+ * @covers \LesDatabase\Query\Builder\Applier\PaginateApplier
  */
 final class PaginateApplierTest extends TestCase
 {

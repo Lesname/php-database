@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Factory;
+namespace LesDatabase\Factory;
 
 use Psr\Log\LoggerInterface;
 use Doctrine\DBAL\Connection;
