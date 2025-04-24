@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier;
+namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\SelectApplier;
+use LesDatabase\Query\Builder\Applier\SelectApplier;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\SelectApplier
+ * @covers \LesDatabase\Query\Builder\Applier\SelectApplier
  */
 final class SelectApplierTest extends TestCase
 {

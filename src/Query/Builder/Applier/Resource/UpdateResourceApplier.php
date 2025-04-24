@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier\Resource;
+namespace LesDatabase\Query\Builder\Applier\Resource;
 
+use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\Applier;
-use LessDomain\Event\AbstractAggregateEvent;
-use LessValueObject\Number\Int\Date\MilliTimestamp;
-use LessValueObject\String\Format\Resource\Identifier;
+use LesDatabase\Query\Builder\Applier\Applier;
+use LesDomain\Event\AbstractAggregateEvent;
+use LesValueObject\Number\Int\Date\MilliTimestamp;
+use LesValueObject\String\Format\Resource\Identifier;
 
 final class UpdateResourceApplier implements Applier
 {
@@ -18,9 +19,10 @@ final class UpdateResourceApplier implements Applier
 
     public static function fromEvent(AbstractAggregateEvent $event): self
     {
-        return new self($event->id, $event->getOccuredOn());
+        return new self($event->id, $event->occurredOn);
     }
 
+    #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         $builder->set('version', 'version + 1');

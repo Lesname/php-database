@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier;
+namespace LesDatabase\Query\Builder\Applier;
 
+use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 final class SelectApplier implements Applier
@@ -56,6 +57,7 @@ final class SelectApplier implements Applier
         return $mapped;
     }
 
+    #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         return $builder->addSelect(...$this->makeSelect());

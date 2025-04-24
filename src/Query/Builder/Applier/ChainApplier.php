@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabase\Query\Builder\Applier;
+namespace LesDatabase\Query\Builder\Applier;
 
+use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 final class ChainApplier implements Applier
@@ -18,6 +19,7 @@ final class ChainApplier implements Applier
         return new self($appliers);
     }
 
+    #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         foreach ($this->appliers as $applier) {

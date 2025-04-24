@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace LessDatabaseTest\Query\Builder\Applier;
+namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use LessDatabase\Query\Builder\Applier\SelectedFilterApplier;
-use LessValueObject\Collection\CollectionValueObject;
-use LessValueObject\Composite\AbstractSelectedFilter;
-use LessValueObject\Enum\FilterMode;
+use LesDatabase\Query\Builder\Applier\SelectedFilterApplier;
+use LesValueObject\Collection\CollectionValueObject;
+use LesValueObject\Composite\AbstractSelectedFilter;
+use LesValueObject\Enum\FilterMode;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \LessDatabase\Query\Builder\Applier\SelectedFilterApplier
+ * @covers \LesDatabase\Query\Builder\Applier\SelectedFilterApplier
  */
 final class SelectedFilterApplierTest extends TestCase
 {
