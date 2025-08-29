@@ -5,7 +5,6 @@ namespace LesDatabase\Query\Builder\Applier;
 
 use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LesDatabase\Query\Builder\Helper\LabelHelper;
 use LesValueObject\Composite\AbstractSelectedFilter;
 use LesValueObject\Enum\EnumValueObject;
 use LesValueObject\Enum\FilterMode;
