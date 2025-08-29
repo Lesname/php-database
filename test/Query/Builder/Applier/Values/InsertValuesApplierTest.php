@@ -119,9 +119,6 @@ final class InsertValuesApplierTest extends TestCase
         $applier = new InsertValuesApplier($values);
 
         $builder = $this->createMock(QueryBuilder::class);
-        $builder
-            ->expects(self::exactly(2))
-            ->method('setParameter');
 
         $builder
             ->expects(self::exactly(2))

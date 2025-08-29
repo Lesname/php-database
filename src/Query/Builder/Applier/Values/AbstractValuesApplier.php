@@ -8,7 +8,6 @@ use Doctrine\DBAL\ParameterType;
 use LesValueObject\ValueObject;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesDatabase\Query\Builder\Applier\Applier;
-use LesDatabase\Query\Builder\Helper\LabelHelper;
 use LesValueObject\Enum\EnumValueObject;
 use LesValueObject\Number\NumberValueObject;
 use LesValueObject\String\StringValueObject;
@@ -59,8 +58,8 @@ abstract class AbstractValuesApplier implements Applier
     protected function getProccessableKeys(QueryBuilder $builder): iterable
     {
         foreach ($this->values as $field => $value) {
-            $value = $value instanceof ValueObject
-                ? $this->toNativeValue($value)
+            $value = $value instanceof EnumValueObject || $value instanceof NumberValueObject
+                ? $value->value
                 : $value;
 
             $key = $builder->createNamedParameter(
@@ -74,24 +73,5 @@ abstract class AbstractValuesApplier implements Applier
 
             yield $field => $key;
         }
-    }
-
-    private function toNativeValue(ValueObject $value): string|int|float
-    {
-        if ($value instanceof EnumValueObject) {
-            return $value->value;
-        }
-
-        if ($value instanceof NumberValueObject) {
-            return $value->value;
-        }
-
-        if ($value instanceof StringValueObject) {
-            return $value->value;
-        }
-
-        $type = get_debug_type($value);
-
-        throw new RuntimeException("No support for '{$type}'");
     }
 }

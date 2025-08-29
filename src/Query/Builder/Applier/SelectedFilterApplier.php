@@ -74,7 +74,11 @@ final class SelectedFilterApplier implements Applier
         $keys = [];
 
         foreach ($options as $item) {
-            $keys[] = $builder->createNamedParameter($item);
+            $value = $item instanceof EnumValueObject || $item instanceof NumberValueObject
+                ? $item->value
+                : $item;
+
+            $keys[] = $builder->createNamedParameter($value);
         }
 
         return $keys;
