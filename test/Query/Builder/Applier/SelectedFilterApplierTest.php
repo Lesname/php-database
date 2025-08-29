@@ -57,8 +57,8 @@ final class SelectedFilterApplierTest extends TestCase
         $builder
             ->method('createNamedParameter')
             ->willReturnOnConsecutiveCalls(
-                'i_pos_1',
-                'i_pos_2',
+                ':i_pos_1',
+                ':i_pos_2',
             );
 
         $builder
@@ -112,8 +112,8 @@ final class SelectedFilterApplierTest extends TestCase
         $builder
             ->method('createNamedParameter')
             ->willReturnOnConsecutiveCalls(
-                'i_pos_1',
-                'i_pos_2',
+                ':i_pos_1',
+                ':i_pos_2',
             );
 
         $builder

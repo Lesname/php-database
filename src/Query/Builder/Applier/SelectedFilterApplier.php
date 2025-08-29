@@ -33,7 +33,7 @@ final class SelectedFilterApplier implements Applier
     private function applyAny(QueryBuilder $builder, AbstractSelectedFilter $filter): void
     {
         if ($filter->selected && $filter->selected->count() > 0) {
-            $keys = ':' . implode(', :', $this->prepareInKeys($builder, $filter->selected));
+            $keys = implode(', ', $this->prepareInKeys($builder, $filter->selected));
             $builder->andWhere("{$this->field} IN ({$keys})");
 
             return;
@@ -45,7 +45,7 @@ final class SelectedFilterApplier implements Applier
     private function applyNone(QueryBuilder $builder, AbstractSelectedFilter $filter): void
     {
         if ($filter->selected && $filter->selected->count() > 0) {
-            $keys = ':' . implode(', :', $this->prepareInKeys($builder, $filter->selected));
+            $keys = implode(', ', $this->prepareInKeys($builder, $filter->selected));
             $builder->andWhere("{$this->field} NOT IN ({$keys})");
 
             return;
