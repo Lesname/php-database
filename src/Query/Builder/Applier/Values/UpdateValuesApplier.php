@@ -12,7 +12,7 @@ final class UpdateValuesApplier extends AbstractValuesApplier
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         foreach ($this->getProccessableKeys($builder) as $field => $key) {
-            $builder->set($field, ":{$key}");
+            $builder->set($field, $key);
         }
 
         return $builder;
