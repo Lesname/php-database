@@ -16,6 +16,8 @@ final class LabelHelper
 
     /**
      * @psalm-pure
+     *
+     * @deprecated use $builder->createNamedParameter($val)
      */
     public static function fromValue(string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value): string
     {

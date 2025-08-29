@@ -63,9 +63,7 @@ abstract class AbstractValuesApplier implements Applier
                 ? $this->toNativeValue($value)
                 : $value;
 
-            $key = LabelHelper::fromValue($value);
-            $builder->setParameter(
-                $key,
+            $key = $builder->createNamedParameter(
                 $value,
                 match (true) {
                     is_int($value) => ParameterType::INTEGER,

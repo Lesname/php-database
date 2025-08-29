@@ -75,10 +75,7 @@ final class SelectedFilterApplier implements Applier
         $keys = [];
 
         foreach ($options as $item) {
-            $key = LabelHelper::fromValue($item);
-            $builder->setParameter($key, $item);
-
-            $keys[] = $key;
+            $keys[] = $builder->createNamedParameter($item);
         }
 
         return $keys;
