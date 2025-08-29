@@ -5,7 +5,6 @@ namespace LesDatabase\Query\Builder\Applier;
 
 use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
-use LesDatabase\Query\Builder\Helper\LabelHelper;
 use LesValueObject\Composite\AbstractSelectedFilter;
 use LesValueObject\Enum\EnumValueObject;
 use LesValueObject\Enum\FilterMode;
@@ -75,10 +74,11 @@ final class SelectedFilterApplier implements Applier
         $keys = [];
 
         foreach ($options as $item) {
-            $key = LabelHelper::fromValue($item);
-            $builder->setParameter($key, $item);
+            $value = $item instanceof EnumValueObject || $item instanceof NumberValueObject
+                ? $item->value
+                : $item;
 
-            $keys[] = $key;
+            $keys[] = $builder->createNamedParameter($value);
         }
 
         return $keys;

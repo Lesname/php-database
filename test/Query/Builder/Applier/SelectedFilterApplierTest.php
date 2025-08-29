@@ -50,23 +50,21 @@ final class SelectedFilterApplierTest extends TestCase
             ->method('count')
             ->willReturn(2);
 
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::None,
-                $collection,
-            ],
-        );
+        $filter = new class (FilterMode::None, $collection) extends AbstractSelectedFilter {
+        };
 
         $builder = $this->createMock(QueryBuilder::class);
+        $builder
+            ->method('createNamedParameter')
+            ->willReturnOnConsecutiveCalls(
+                'i_pos_1',
+                'i_pos_2',
+            );
+
         $builder
             ->expects(self::once())
             ->method('andWhere')
             ->with('fiz NOT IN (:i_pos_1, :i_pos_2)');
-
-        $builder
-            ->expects(self::exactly(2))
-            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);
@@ -107,23 +105,21 @@ final class SelectedFilterApplierTest extends TestCase
             ->method('count')
             ->willReturn(2);
 
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::Any,
-                $collection,
-            ],
-        );
+        $filter = new class (FilterMode::Any, $collection) extends AbstractSelectedFilter {
+        };
 
         $builder = $this->createMock(QueryBuilder::class);
+        $builder
+            ->method('createNamedParameter')
+            ->willReturnOnConsecutiveCalls(
+                'i_pos_1',
+                'i_pos_2',
+            );
+
         $builder
             ->expects(self::once())
             ->method('andWhere')
             ->with('fiz IN (:i_pos_1, :i_pos_2)');
-
-        $builder
-            ->expects(self::exactly(2))
-            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);
@@ -163,22 +159,13 @@ final class SelectedFilterApplierTest extends TestCase
             ->method('count')
             ->willReturn(2);
 
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::All,
-                $collection,
-            ],
-        );
+        $filter = new class (FilterMode::All, $collection) extends AbstractSelectedFilter {
+        };
 
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::exactly(2))
             ->method('andWhere');
-
-        $builder
-            ->expects(self::exactly(2))
-            ->method('setParameter');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);

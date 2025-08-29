@@ -133,8 +133,12 @@ final class AbstractValuesApplierTest extends TestCase
 
         $builder = $this->createMock(QueryBuilder::class);
         $builder
-            ->expects(self::exactly(3))
-            ->method('setParameter');
+            ->method('createNamedParameter')
+            ->willReturnOnConsecutiveCalls(
+                'sf_6_b45cffe084dd3d20d928bee85e7b0f21',
+                'i_pos_3',
+                'b_false',
+            );
 
         $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
@@ -198,8 +202,8 @@ final class AbstractValuesApplierTest extends TestCase
         $builder = $this->createMock(QueryBuilder::class);
         $builder
             ->expects(self::once())
-            ->method('setParameter')
-            ->with('sf_6_b45cffe084dd3d20d928bee85e7b0f21', 'string');
+            ->method('createNamedParameter')
+            ->willReturn('sf_6_b45cffe084dd3d20d928bee85e7b0f21');
 
         $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
@@ -214,10 +218,12 @@ final class AbstractValuesApplierTest extends TestCase
 
     public function testWithValue(): void
     {
-        $mock = $this->getMockForAbstractClass(
-            AbstractValuesApplier::class,
-            [['foo' => 'bar']],
-        );
+        $mock = new class (['foo' => 'bar']) extends AbstractValuesApplier {
+            public function apply(QueryBuilder $builder): QueryBuilder
+            {
+                throw new RuntimeException();
+            }
+        };
 
         self::assertSame(['foo' => 'bar'], $mock->getValues());
 
