@@ -135,9 +135,9 @@ final class AbstractValuesApplierTest extends TestCase
         $builder
             ->method('createNamedParameter')
             ->willReturnOnConsecutiveCalls(
-                'sf_6_b45cffe084dd3d20d928bee85e7b0f21',
-                'i_pos_3',
-                'b_false',
+                ':sf_6_b45cffe084dd3d20d928bee85e7b0f21',
+                ':i_pos_3',
+                ':b_false',
             );
 
         $processed = $applier->getProccessableKeys($builder);
@@ -147,9 +147,9 @@ final class AbstractValuesApplierTest extends TestCase
 
         self::assertSame(
             [
-                'foo' => 'sf_6_b45cffe084dd3d20d928bee85e7b0f21',
-                'bar' => 'i_pos_3',
-                'biz' => 'b_false',
+                'foo' => ':sf_6_b45cffe084dd3d20d928bee85e7b0f21',
+                'bar' => ':i_pos_3',
+                'biz' => ':b_false',
             ],
             $processed,
         );
@@ -203,7 +203,7 @@ final class AbstractValuesApplierTest extends TestCase
         $builder
             ->expects(self::once())
             ->method('createNamedParameter')
-            ->willReturn('sf_6_b45cffe084dd3d20d928bee85e7b0f21');
+            ->willReturn(':sf_6_b45cffe084dd3d20d928bee85e7b0f21');
 
         $processed = $applier->getProccessableKeys($builder);
         $processed = $processed instanceof Traversable
@@ -211,7 +211,7 @@ final class AbstractValuesApplierTest extends TestCase
             : $processed;
 
         self::assertSame(
-            ['foo' => 'sf_6_b45cffe084dd3d20d928bee85e7b0f21'],
+            ['foo' => ':sf_6_b45cffe084dd3d20d928bee85e7b0f21'],
             $processed,
         );
     }

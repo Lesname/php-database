@@ -58,7 +58,7 @@ final class SelectedFilterApplier implements Applier
     {
         if ($filter->selected) {
             foreach ($this->prepareInKeys($builder, $filter->selected) as $key) {
-                $builder->andWhere("{$this->field} = :{$key}");
+                $builder->andWhere("{$this->field} = {$key}");
             }
         }
     }

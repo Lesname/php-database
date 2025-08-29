@@ -53,7 +53,7 @@ abstract class AbstractValuesApplier implements Applier
     }
 
     /**
-     * @return iterable<string, string|int|bool|float|null>
+     * @return iterable<string, string>
      */
     protected function getProccessableKeys(QueryBuilder $builder): iterable
     {
