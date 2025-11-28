@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Applier\Values;
 
+use Stringable;
 use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesValueObject\Number\NumberValueObject;
@@ -18,8 +20,11 @@ final class InsertValuesApplierTest extends TestCase
 {
     public function testApply(): void
     {
-        $string = new class implements StringValueObject {
+        $string = new class ('string') implements StringValueObject {
             public string $value = 'string';
+
+            public function __construct(Stringable|string $value)
+            {}
 
             public static function getMinimumLength(): int
             {
@@ -47,8 +52,11 @@ final class InsertValuesApplierTest extends TestCase
             }
         };
 
-        $number = new class implements IntValueObject {
+        $number = new class (3) implements IntValueObject {
             public int $value = 3;
+
+            public function __construct(int|IntValueObject $value)
+            {}
 
             public static function getMinimumValue(): int
             {
@@ -90,12 +98,12 @@ final class InsertValuesApplierTest extends TestCase
                 throw new RuntimeException();
             }
 
-            public function subtract(NumberValueObject|float|int $value): static
+            public function subtract(NumberValueObject|float|int $value): float|int
             {
                 throw new RuntimeException();
             }
 
-            public function append(NumberValueObject|float|int $value): static
+            public function append(NumberValueObject|float|int $value): float|int
             {
                 throw new RuntimeException();
             }

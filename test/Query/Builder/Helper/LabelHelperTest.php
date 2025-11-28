@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Helper;
 
 use RuntimeException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use LesDatabase\Query\Builder\Helper\LabelHelper;
 use LesValueObject\Enum\EnumValueObject;
 use LesValueObject\Number\NumberValueObject;
@@ -17,9 +19,7 @@ use LesValueObject\Number\Int\AbstractIntValueObject;
  */
 final class LabelHelperTest extends TestCase
 {
-    /**
-     * @dataProvider getFieldValueTests
-     */
+    #[DataProvider('getFieldValueTests')]
     public function testCreateFieldValueKey(string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value, string $expectedKey): void
     {
         self::assertSame($expectedKey, LabelHelper::fromValue($value));
