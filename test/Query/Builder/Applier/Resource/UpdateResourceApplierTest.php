@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Applier\Resource;
@@ -30,27 +31,15 @@ final class UpdateResourceApplierTest extends TestCase
             public Target $target {
                 get {
                     // phpcs:ignore
-                    return $this->target;
+                    return new Target('foo');
                 }
             }
             // phpcs:ignore
             public Action $action {
                 get {
                     // phpcs:ignore
-                    return $this->action;
+                    return new Action('bar');
                 }
-            }
-
-            #[Override]
-            public function getTarget(): Target
-            {
-                return new Action('foo');
-            }
-
-            #[Override]
-            public function getAction(): Action
-            {
-                return new Action('bar');
             }
         };
 

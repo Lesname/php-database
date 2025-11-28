@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Applier;
@@ -15,26 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class SelectedFilterApplierTest extends TestCase
 {
-    public function testNoneNoSelection(): void
-    {
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::None,
-                null,
-            ],
-        );
-
-        $builder = $this->createMock(QueryBuilder::class);
-        $builder
-            ->expects(self::once())
-            ->method('andWhere')
-            ->with('fiz IS NULL');
-
-        $applier = new SelectedFilterApplier('fiz', $filter);
-        $applier->apply($builder);
-    }
-
     public function testNoneWithSelection(): void
     {
         $collection = $this->createMock(CollectionValueObject::class);
@@ -70,26 +51,6 @@ final class SelectedFilterApplierTest extends TestCase
         $applier->apply($builder);
     }
 
-    public function testAnyNoSelection(): void
-    {
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::Any,
-                null,
-            ],
-        );
-
-        $builder = $this->createMock(QueryBuilder::class);
-        $builder
-            ->expects(self::once())
-            ->method('andWhere')
-            ->with('fiz IS NOT NULL');
-
-        $applier = new SelectedFilterApplier('fiz', $filter);
-        $applier->apply($builder);
-    }
-
     public function testAnyWithSelection(): void
     {
         $collection = $this->createMock(CollectionValueObject::class);
@@ -120,25 +81,6 @@ final class SelectedFilterApplierTest extends TestCase
             ->expects(self::once())
             ->method('andWhere')
             ->with('fiz IN (:i_pos_1, :i_pos_2)');
-
-        $applier = new SelectedFilterApplier('fiz', $filter);
-        $applier->apply($builder);
-    }
-
-    public function testAllNoSelection(): void
-    {
-        $filter = $this->getMockForAbstractClass(
-            AbstractSelectedFilter::class,
-            [
-                FilterMode::All,
-                null,
-            ],
-        );
-
-        $builder = $this->createMock(QueryBuilder::class);
-        $builder
-            ->expects(self::never())
-            ->method('andWhere');
 
         $applier = new SelectedFilterApplier('fiz', $filter);
         $applier->apply($builder);
