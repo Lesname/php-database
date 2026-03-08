@@ -51,6 +51,11 @@ final class UpdateValuesApplierTest extends TestCase
             {
                 throw new RuntimeException();
             }
+
+            public function isEqual(Stringable|string $value): bool
+            {
+                throw new RuntimeException();
+            }
         };
 
         $number = new class (3) implements IntValueObject {
@@ -95,6 +100,11 @@ final class UpdateValuesApplierTest extends TestCase
             }
 
             public function diff(NumberValueObject|float|int $with): float|int
+            {
+                throw new RuntimeException();
+            }
+
+            public function format(string $thousandSeparator = ','): string
             {
                 throw new RuntimeException();
             }

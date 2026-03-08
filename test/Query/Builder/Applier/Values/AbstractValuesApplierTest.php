@@ -47,6 +47,11 @@ final class AbstractValuesApplierTest extends TestCase
                 throw new RuntimeException();
             }
 
+            public function isEqual(Stringable|string $value): bool
+            {
+                throw new RuntimeException();
+            }
+
             public function jsonSerialize(): mixed
             {
                 throw new RuntimeException();
@@ -101,6 +106,11 @@ final class AbstractValuesApplierTest extends TestCase
             }
 
             public function subtract(NumberValueObject|float|int $value): float|int
+            {
+                throw new RuntimeException();
+            }
+
+            public function format(string $thousandSeparator = ','): string
             {
                 throw new RuntimeException();
             }
@@ -188,6 +198,11 @@ final class AbstractValuesApplierTest extends TestCase
             }
 
             public function __toString(): string
+            {
+                throw new RuntimeException();
+            }
+
+            public function isEqual(Stringable|string $value): bool
             {
                 throw new RuntimeException();
             }
