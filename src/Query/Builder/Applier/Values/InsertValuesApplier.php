@@ -13,7 +13,7 @@ final class InsertValuesApplier extends AbstractValuesApplier
     public function apply(QueryBuilder $builder): QueryBuilder
     {
         foreach ($this->getProccessableKeys($builder) as $field => $key) {
-            $builder->setValue($field, $key);
+            $builder->setValue("`{$field}`", $key);
         }
 
         return $builder;
