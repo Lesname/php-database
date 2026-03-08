@@ -41,6 +41,11 @@ final class InsertValuesApplierTest extends TestCase
                 throw new RuntimeException();
             }
 
+            public function isEqual(Stringable|string $value): bool
+            {
+                throw new RuntimeException();
+            }
+
             public function __toString(): string
             {
                 throw new RuntimeException();
@@ -114,6 +119,11 @@ final class InsertValuesApplierTest extends TestCase
             }
 
             public function jsonSerialize(): mixed
+            {
+                throw new RuntimeException();
+            }
+
+            public function format(string $thousandSeparator = ','): string
             {
                 throw new RuntimeException();
             }
