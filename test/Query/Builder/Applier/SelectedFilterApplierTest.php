@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\SelectedFilterApplier;
 use LesValueObject\Collection\CollectionValueObject;
 use LesValueObject\Composite\AbstractSelectedFilter;
 use LesValueObject\Enum\FilterMode;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\SelectedFilterApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\SelectedFilterApplier::class)]
 final class SelectedFilterApplierTest extends TestCase
 {
     public function testNoneWithSelection(): void

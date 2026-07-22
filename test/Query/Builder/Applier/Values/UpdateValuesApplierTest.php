@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Applier\Values;
 
-use Override;
 use Stringable;
 use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesValueObject\Number\NumberValueObject;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\Values\UpdateValuesApplier;
 use LesValueObject\Number\Int\IntValueObject;
 use LesValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\Values\UpdateValuesApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\Values\UpdateValuesApplier::class)]
 final class UpdateValuesApplierTest extends TestCase
 {
     public function testApply(): void

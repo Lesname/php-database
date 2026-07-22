@@ -70,7 +70,11 @@ final class SelectApplier implements Applier
     private function makeSelect(): iterable
     {
         foreach ($this->select as $as => $sql) {
-            yield "{$sql} as '{$as}'";
+            yield sprintf(
+                '%s as "%s"',
+                $sql,
+                $as,
+            );
         }
     }
 
