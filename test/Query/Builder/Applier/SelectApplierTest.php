@@ -20,8 +20,8 @@ final class SelectApplierTest extends TestCase
             ->expects(self::once())
             ->method('addSelect')
             ->with(
-                "foo as 'fiz'",
-                "yxz as 'bar.biz'",
+                'foo as "fiz"',
+                'yxz as "bar.biz"',
             )
             ->willReturn($builder);
 
