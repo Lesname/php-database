@@ -6,10 +6,9 @@ namespace LesDatabaseTest\Builder;
 
 use LesDatabase\Builder\SettingsBuilder;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesDatabase\Builder\SettingsBuilder
- */
+#[CoversClass(\LesDatabase\Builder\SettingsBuilder::class)]
 class SettingsBuilderTest extends TestCase
 {
     public function testWith(): void

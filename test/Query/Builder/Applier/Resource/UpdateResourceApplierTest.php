@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace LesDatabaseTest\Query\Builder\Applier\Resource;
 
-use Override;
 use LesDomain\Event\Property\Action;
 use LesDomain\Event\Property\Target;
 use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier;
 use LesDomain\Event\AbstractAggregateEvent;
 use LesDomain\Event\Property\Headers;
@@ -15,9 +15,7 @@ use LesValueObject\Number\Int\Date\MilliTimestamp;
 use LesValueObject\String\Format\Resource\Identifier;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\Resource\UpdateResourceApplier::class)]
 final class UpdateResourceApplierTest extends TestCase
 {
     public function testApply(): void

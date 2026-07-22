@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\PaginateApplier;
 use LesValueObject\Composite\Paginate;
 use LesValueObject\Number\Int\Paginate\Page;
 use LesValueObject\Number\Int\Paginate\PerPage;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\PaginateApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\PaginateApplier::class)]
 final class PaginateApplierTest extends TestCase
 {
     public function testSetup(): void

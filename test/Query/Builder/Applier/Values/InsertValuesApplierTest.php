@@ -8,14 +8,13 @@ use Stringable;
 use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesValueObject\Number\NumberValueObject;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\Values\InsertValuesApplier;
 use LesValueObject\Number\Int\IntValueObject;
 use LesValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\Values\InsertValuesApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\Values\InsertValuesApplier::class)]
 final class InsertValuesApplierTest extends TestCase
 {
     public function testApply(): void

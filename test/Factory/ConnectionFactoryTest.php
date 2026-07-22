@@ -8,10 +8,9 @@ use Doctrine\DBAL\Connection;
 use LesDatabase\Factory\ConnectionFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesDatabase\Factory\ConnectionFactory
- */
+#[CoversClass(\LesDatabase\Factory\ConnectionFactory::class)]
 final class ConnectionFactoryTest extends TestCase
 {
     public function testCreate(): void

@@ -8,15 +8,14 @@ use Stringable;
 use RuntimeException;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesValueObject\Number\NumberValueObject;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\Values\AbstractValuesApplier;
 use LesValueObject\Number\Int\IntValueObject;
 use LesValueObject\String\StringValueObject;
 use PHPUnit\Framework\TestCase;
 use Traversable;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\Values\AbstractValuesApplier
- */
+#[CoversClass(AbstractValuesApplier::class)]
 final class AbstractValuesApplierTest extends TestCase
 {
     public function testProcessKey(): void

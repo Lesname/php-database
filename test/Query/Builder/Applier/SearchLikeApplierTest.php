@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\SearchLikeApplier;
 use LesValueObject\String\Format\SearchTerm;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\SearchLikeApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\SearchLikeApplier::class)]
 final class SearchLikeApplierTest extends TestCase
 {
     public function testApply(): void

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace LesDatabaseTest\Query\Builder\Applier;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesDatabase\Query\Builder\Applier\Applier;
 use LesDatabase\Query\Builder\Applier\ChainApplier;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesDatabase\Query\Builder\Applier\ChainApplier
- */
+#[CoversClass(\LesDatabase\Query\Builder\Applier\ChainApplier::class)]
 class ChainApplierTest extends TestCase
 {
     public function testChain(): void
