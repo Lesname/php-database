@@ -78,7 +78,7 @@ final class SearchLikeApplier implements Applier
 
             foreach ($this->fields as $field => $weight) {
                 $searcher[] = "({$field} like {$liker})";
-                $order[] = "if({$field} like {$liker}, {$weight}, 0)";
+                $order[] = "case when {$field} like {$liker} then {$weight} else 0 end";
             }
         }
 
