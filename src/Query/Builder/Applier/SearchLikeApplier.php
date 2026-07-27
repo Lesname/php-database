@@ -58,7 +58,7 @@ final class SearchLikeApplier implements Applier
                 $fullWeight = $weight * 2;
 
                 $searcher[] = "({$field} like {$liker})";
-                $order[] = "if({$field} like {$liker}, {$fullWeight}, 0)";
+                $order[] = "case when {$field} like {$liker} then {$fullWeight} else 0 end";
             }
         }
 

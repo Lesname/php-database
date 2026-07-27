@@ -39,12 +39,12 @@ final class SearchLikeApplierTest extends TestCase
             . implode(
                 ' + ',
                 [
-                    "if(fiz like concat('%', :term_full, '%'), 4, 0)",
-                    "if(foo like concat('%', :term_full, '%'), 2, 0)",
-                    "if(fiz like concat('%', :term_0, '%'), 2, 0)",
-                    "if(foo like concat('%', :term_0, '%'), 1, 0)",
-                    "if(fiz like concat('%', :term_3, '%'), 2, 0)",
-                    "if(foo like concat('%', :term_3, '%'), 1, 0)",
+                    "case when fiz like concat('%', :term_full, '%') then 4 else 0 end",
+                    "case when foo like concat('%', :term_full, '%') then 2 else 0 end",
+                    "case when fiz like concat('%', :term_0, '%') then 2 else 0 end",
+                    "case when foo like concat('%', :term_0, '%') then 1 else 0 end",
+                    "case when fiz like concat('%', :term_3, '%') then 2 else 0 end",
+                    "case when foo like concat('%', :term_3, '%') then 1 else 0 end",
                 ],
             )
             . ')';
