@@ -2,17 +2,19 @@
   "name": "lesname/database",
   "license": "MIT",
   "require": {
-    "php": "^8.4.0",
+    "php": "^8.5.0",
 
     "doctrine/dbal": "^4.0.0",
 
-    "lesname/value-object": "^0.6.0"
+    "lesname/value-object": "^0.7.0"
   },
   "require-dev": {
-    "lesname/domain": "^0.7.0",
+    "lesname/domain": "^0.7.5",
 
     "squizlabs/php_codesniffer": "^4.0.0",
-    "phpunit/phpunit": "^12.0.0",
+    "phpunit/phpunit": "^13.0.0",
+
+    "vimeo/psalm": "^7.0.0-beta19",
 
     "phpstan/phpstan": "^2.0.0",
     "phpstan/extension-installer": "^1.4.0",

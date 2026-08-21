@@ -57,6 +57,7 @@ final class ConnectionFactory
             );
         }
 
+        /** @psalm-suppress MixedArgument */
         // @phpstan-ignore argument.type
         return DriverManager::getConnection($config['databases'][Connection::class]);
     }

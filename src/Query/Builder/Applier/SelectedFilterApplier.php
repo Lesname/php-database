@@ -14,9 +14,15 @@ use LesValueObject\String\StringValueObject;
 
 final class SelectedFilterApplier implements Applier
 {
+    /**
+     * @psalm-mutation-free
+     */
     public function __construct(private string $field, private ?AbstractSelectedFilter $filter)
     {}
 
+    /**
+     * @psalm-impure
+     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {

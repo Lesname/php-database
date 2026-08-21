@@ -13,16 +13,25 @@ use LesValueObject\String\Format\Resource\Identifier;
 
 final class UpdateResourceApplier implements Applier
 {
+    /**
+     * @psalm-pure
+     */
     public function __construct(
         private readonly Identifier $id,
         private readonly MilliTimestamp $occurredOn,
     ) {}
 
+    /**
+     * @psalm-pure
+     */
     public static function fromEvent(AbstractAggregateEvent $event): self
     {
         return new self($event->id, $event->occurredOn);
     }
 
+    /**
+     * @psalm-impure
+     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
