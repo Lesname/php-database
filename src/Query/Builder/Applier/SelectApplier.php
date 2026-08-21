@@ -14,11 +14,13 @@ final class SelectApplier implements Applier
 
     /**
      * @param array<string, string> $select
+     *
+     * @psalm-pure
      */
     public function __construct(iterable $select)
     {
         foreach ($select as $as => $sql) {
-            $this->addItem($as, $sql);
+            $this->select[$as] = $sql;
         }
     }
 
@@ -26,6 +28,7 @@ final class SelectApplier implements Applier
      * @param array<string, string|array<string, string|array<string, string|array<string, string|array<string, string|array<string, string|array<string, string|array<string, string>>>>>>>> $select
      *
      * @psalm-suppress MixedArgumentTypeCoercion cannot be safely hinted
+     * @psalm-pure
      */
     public static function fromNested(array $select): self
     {
@@ -37,6 +40,8 @@ final class SelectApplier implements Applier
      * @param string $prefix
      *
      * @return array<string, string>
+     *
+     * @psalm-pure
      */
     private static function flatten(array $values, string $prefix = ''): array
     {
@@ -66,6 +71,8 @@ final class SelectApplier implements Applier
 
     /**
      * @return iterable<int, string>
+     *
+     * @psalm-mutation-free
      */
     private function makeSelect(): iterable
     {
@@ -76,10 +83,5 @@ final class SelectApplier implements Applier
                 $as,
             );
         }
-    }
-
-    private function addItem(string $as, string $sql): void
-    {
-        $this->select[$as] = $sql;
     }
 }

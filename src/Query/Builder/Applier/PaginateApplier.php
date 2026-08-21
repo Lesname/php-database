@@ -10,9 +10,15 @@ use LesValueObject\Composite\Paginate;
 
 final class PaginateApplier implements Applier
 {
+    /**
+     * @psalm-mutation-free
+     */
     public function __construct(private ?Paginate $paginate)
     {}
 
+    /**
+     * @psalm-impure
+     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {

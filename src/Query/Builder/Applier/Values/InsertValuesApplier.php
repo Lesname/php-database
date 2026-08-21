@@ -9,6 +9,9 @@ use Doctrine\DBAL\Query\QueryBuilder;
 
 final class InsertValuesApplier extends AbstractValuesApplier
 {
+    /**
+     * @psalm-impure
+     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {

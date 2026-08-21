@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace LesDatabase\Query\Builder\Applier\Values;
 
-use RuntimeException;
 use Doctrine\DBAL\ParameterType;
-use LesValueObject\ValueObject;
 use Doctrine\DBAL\Query\QueryBuilder;
 use LesDatabase\Query\Builder\Applier\Applier;
 use LesValueObject\Enum\EnumValueObject;
@@ -17,18 +15,25 @@ abstract class AbstractValuesApplier implements Applier
 {
     /**
      * @param array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null> $values
+     *
+     * @psalm-pure
      */
     final public function __construct(protected array $values)
     {}
 
     /**
      * @param array<string, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null> $values
+     *
+     * @psalm-pure
      */
     public static function forValues(array $values): static
     {
         return new static($values);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function forValue(string $field, string|int|bool|float|EnumValueObject|NumberValueObject|StringValueObject|null $value): static
     {
         return new static([$field => $value]);

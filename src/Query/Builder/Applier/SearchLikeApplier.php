@@ -33,10 +33,15 @@ final class SearchLikeApplier implements Applier
      * @param SearchTerm $term
      * @param array<string, int> $fields
      * @param bool $order
+     *
+     * @psalm-mutation-free
      */
     public function __construct(private SearchTerm $term, private array $fields, private bool $order = true)
     {}
 
+    /**
+     * @psalm-impure
+     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
