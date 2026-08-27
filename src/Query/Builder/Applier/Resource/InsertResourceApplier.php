@@ -7,21 +7,16 @@ namespace LesDatabase\Query\Builder\Applier\Resource;
 use Override;
 use Doctrine\DBAL\Query\QueryBuilder;
 
-final class UpdateResourceApplier extends AbstractResourceApplier
+final class InsertResourceApplier extends AbstractResourceApplier
 {
-    /**
-     * @psalm-impure
-     */
     #[Override]
     public function apply(QueryBuilder $builder): QueryBuilder
     {
-        $builder->set('version', 'version + 1');
-
-        $builder->set('activity_last', ':activity_last');
-        $builder->setParameter('activity_last', $this->occurredOn);
-
-        $builder->andWhere('id = :id');
+        $builder->setValue('id', ':id');
         $builder->setParameter('id', $this->id);
+
+        $builder->setValue('activity_last', ':activity_last');
+        $builder->setParameter('activity_last', $this->occurredOn);
 
         return $builder;
     }
